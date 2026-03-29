@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -9,12 +9,39 @@ function getDataPath() {
   return path.join(userDataPath, 'data.json');
 }
 
-function getCharactersPath() {
-  // In production, use extraResources; in dev, use local folder
+function getBundledCharactersPath() {
   if (app.isPackaged) {
     return path.join(process.resourcesPath, 'characters');
   }
   return path.join(__dirname, 'characters');
+}
+
+function getCharactersPath() {
+  // User-writable folder in appData so new images can be added without rebuilding
+  const userCharDir = path.join(app.getPath('userData'), 'characters');
+  if (!fs.existsSync(userCharDir)) {
+    fs.mkdirSync(userCharDir, { recursive: true });
+    // Copy bundled images on first run
+    const bundled = getBundledCharactersPath();
+    try {
+      const files = fs.readdirSync(bundled).filter(f => /\.(png|jpg|jpeg|gif|webp)$/i.test(f));
+      files.forEach(f => {
+        fs.copyFileSync(path.join(bundled, f), path.join(userCharDir, f));
+      });
+    } catch {}
+  }
+  return userCharDir;
+}
+
+function getDefaultBossDataPath() {
+  if (app.isPackaged) {
+    return path.join(process.resourcesPath, 'bossData.json');
+  }
+  return path.join(__dirname, 'bossData.json');
+}
+
+function getCustomBossDataPath() {
+  return path.join(app.getPath('userData'), 'bossData.json');
 }
 
 function createWindow() {
@@ -23,7 +50,7 @@ function createWindow() {
     height: 750,
     minWidth: 800,
     minHeight: 500,
-    backgroundColor: '#1a1b26',
+    backgroundColor: '#1a1a1e',
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -61,6 +88,57 @@ ipcMain.handle('save-data', async (event, data) => {
   const dataPath = getDataPath();
   fs.writeFileSync(dataPath, JSON.stringify(data, null, 2), 'utf-8');
   return true;
+});
+
+// IPC: Load boss data (custom first, fallback to default)
+ipcMain.handle('load-boss-data', async () => {
+  const customPath = getCustomBossDataPath();
+  try {
+    const raw = fs.readFileSync(customPath, 'utf-8');
+    return JSON.parse(raw);
+  } catch {
+    // Fall back to default
+    try {
+      const raw = fs.readFileSync(getDefaultBossDataPath(), 'utf-8');
+      return JSON.parse(raw);
+    } catch {
+      return [];
+    }
+  }
+});
+
+// IPC: Save custom boss data
+ipcMain.handle('save-boss-data', async (event, data) => {
+  const customPath = getCustomBossDataPath();
+  fs.writeFileSync(customPath, JSON.stringify(data, null, 2), 'utf-8');
+  return true;
+});
+
+// IPC: Reset boss data to defaults
+ipcMain.handle('reset-boss-data', async () => {
+  const customPath = getCustomBossDataPath();
+  try { fs.unlinkSync(customPath); } catch {}
+  const raw = fs.readFileSync(getDefaultBossDataPath(), 'utf-8');
+  return JSON.parse(raw);
+});
+
+// IPC: Load an icon file from the app directory
+ipcMain.handle('load-icon', async (event, filename) => {
+  let iconPath;
+  if (app.isPackaged) {
+    iconPath = path.join(process.resourcesPath, 'icons', filename);
+  } else {
+    iconPath = path.join(__dirname, filename);
+  }
+  try {
+    const data = fs.readFileSync(iconPath);
+    const base64 = data.toString('base64');
+    const ext = path.extname(filename).slice(1).toLowerCase();
+    const mime = ext === 'jpg' ? 'jpeg' : ext;
+    return `data:image/${mime};base64,${base64}`;
+  } catch {
+    return null;
+  }
 });
 
 // IPC: List character images

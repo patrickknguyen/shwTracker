@@ -18,6 +18,9 @@
       "index.html",
       "style.css",
       "renderer.js",
+      "bossData.json",
+      "purple_crystal.png",
+      "yellow_crystal.png",
       "characters/**/*"
     ],
     "extraResources": [
@@ -27,6 +30,18 @@
         "filter": [
           "**/*"
         ]
+      },
+      {
+        "from": "bossData.json",
+        "to": "bossData.json"
+      },
+      {
+        "from": "purple_crystal.png",
+        "to": "icons/purple_crystal.png"
+      },
+      {
+        "from": "yellow_crystal.png",
+        "to": "icons/yellow_crystal.png"
       }
     ],
     "mac": {
@@ -34,8 +49,16 @@
       "category": "public.app-category.utilities"
     },
     "win": {
-      "target": "portable",
+      "target": "nsis",
       "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "shwTracker"
     }
   },
   "keywords": [],

@@ -13,70 +13,74 @@
     <span id="week-range"></span>
   </div>
 
-  <div id="app">
-    <!-- Dailies Panel -->
-    <div class="panel" id="dailies-panel">
-      <div class="panel-header">
-        <span class="panel-title">Dailies</span>
-        <div class="panel-actions">
-          <label class="toggle-label" title="Toggle event column">
-            <input type="checkbox" id="event-toggle">
-            <span class="toggle-slider"></span>
-            <span class="toggle-text">Event</span>
-          </label>
-        </div>
-      </div>
-      <div class="panel-body">
-        <table id="dailies-table">
-          <thead>
-            <tr id="dailies-header-row">
-              <th class="remove-col"></th>
-              <th class="char-col"></th>
-              <!-- Task headers inserted by JS -->
-            </tr>
-          </thead>
-          <tbody id="dailies-body">
-            <!-- Character rows inserted by JS -->
-          </tbody>
-        </table>
-        <div class="add-char-row">
-          <button class="btn-add-char" id="add-character" title="Add character">+</button>
-        </div>
-      </div>
-    </div>
+  <!-- Tab bar -->
+  <div id="tab-bar">
+    <button class="tab active" data-tab="tracker">Tracker</button>
+    <button class="tab" data-tab="income">Weekly Income</button>
+  </div>
 
-    <!-- Bosses Panel -->
-    <div class="panel" id="bosses-panel">
-      <div class="panel-header">
-        <span class="panel-title">Bosses</span>
-      </div>
-      <div class="panel-body">
-        <table id="bosses-table">
-          <thead>
-            <tr id="bosses-header-row">
-              <!-- Task headers inserted by JS -->
-            </tr>
-          </thead>
-          <tbody id="bosses-body">
-            <!-- Character rows inserted by JS -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Memos Panel -->
-    <div class="panel" id="memos-panel">
-      <div class="panel-header">
-        <span class="panel-title memo-title">Memos</span>
-        <div class="panel-actions">
-          <button class="btn-icon" id="add-memo" title="Add memo">+</button>
+  <!-- ==================== TRACKER VIEW ==================== -->
+  <div id="tracker-view" class="view active">
+    <div id="app">
+      <!-- Combined Dailies + Bosses Panel -->
+      <div class="panel" id="tracker-panel">
+        <div class="panel-body tracker-scroll">
+          <table id="tracker-table">
+            <thead>
+              <tr id="tracker-section-row">
+                <!-- Section labels (Dailies + toggle, Bosses) built by JS -->
+              </tr>
+              <tr id="tracker-header-row">
+                <!-- Emoji column headers built by JS -->
+              </tr>
+            </thead>
+            <tbody id="tracker-body">
+              <!-- Character rows built by JS -->
+            </tbody>
+          </table>
+          <div class="add-char-row">
+            <button class="btn-add-char" id="add-character" title="Add character">+</button>
+          </div>
         </div>
       </div>
-      <div class="panel-body memos-body" id="memos-list">
-        <!-- Memo cards inserted by JS -->
+
+      <!-- Memos Panel -->
+      <div class="panel" id="memos-panel">
+        <div class="panel-header">
+          <span class="panel-title memo-title">Memos</span>
+          <div class="panel-actions">
+            <button class="btn-icon" id="add-memo" title="Add memo">+</button>
+          </div>
+        </div>
+        <div class="panel-body memos-body" id="memos-list"></div>
       </div>
     </div>
   </div>
+
+  <!-- ==================== INCOME VIEW ==================== -->
+  <div id="income-view" class="view">
+    <div id="income-container">
+      <div class="panel" id="income-panel">
+        <div class="panel-header">
+          <span class="panel-title income-title">Weekly Boss Income</span>
+          <div class="panel-actions">
+            <button class="btn-icon" id="manage-bosses" title="Manage Bosses">&#9881;</button>
+          </div>
+        </div>
+        <div class="panel-body income-body">
+          <div class="income-table-wrap">
+            <table id="income-table">
+              <thead id="income-thead"></thead>
+              <tbody id="income-tbody"></tbody>
+              <tfoot id="income-tfoot"></tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
 
   <!-- Character picker modal (for adding rows) -->
   <div id="char-modal" class="modal hidden">
@@ -85,9 +89,7 @@
         <span>Select Character Image</span>
         <button class="btn-icon modal-close" id="modal-close">&times;</button>
       </div>
-      <div class="modal-body" id="char-grid">
-        <!-- Character images inserted by JS -->
-      </div>
+      <div class="modal-body" id="char-grid"></div>
     </div>
   </div>
 
@@ -98,11 +100,42 @@
         <span>Tag Characters</span>
         <button class="btn-icon modal-close" id="memo-modal-close">&times;</button>
       </div>
-      <div class="modal-body" id="memo-char-grid">
-        <!-- Character images inserted by JS -->
-      </div>
+      <div class="modal-body" id="memo-char-grid"></div>
       <div class="modal-footer">
         <button class="btn-done" id="memo-char-done">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tracker Settings modal -->
+  <div id="tracker-settings-modal" class="modal hidden">
+    <div class="modal-content ts-modal-content">
+      <div class="modal-header">
+        <span>Tracker Settings</span>
+        <button class="btn-icon modal-close" id="tracker-settings-close">&times;</button>
+      </div>
+      <div class="modal-body ts-modal-body" id="tracker-settings-modal-body"></div>
+      <div class="modal-footer ts-modal-footer">
+        <button class="btn-secondary" id="tracker-settings-add-boss">+ Add Boss</button>
+        <button class="btn-done" id="tracker-settings-save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Boss Manager modal -->
+  <div id="boss-modal" class="modal hidden">
+    <div class="modal-content boss-modal-content">
+      <div class="modal-header">
+        <span>Manage Bosses</span>
+        <button class="btn-icon modal-close" id="boss-modal-close">&times;</button>
+      </div>
+      <div class="modal-body boss-modal-body" id="boss-modal-list"></div>
+      <div class="modal-footer boss-modal-footer">
+        <button class="btn-secondary" id="boss-add-new">+ Add Boss</button>
+        <div class="boss-footer-right">
+          <button class="btn-secondary" id="boss-reset-defaults">Reset Defaults</button>
+          <button class="btn-done" id="boss-save">Save</button>
+        </div>
       </div>
     </div>
   </div>

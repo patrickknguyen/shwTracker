@@ -1,0 +1,132 @@
+[
+  {
+    "name": "Lotus",
+    "category": "Arcane",
+    "difficulties": [
+      { "level": "Normal",  "meso": 162562500 },
+      { "level": "Hard",    "meso": 444675000 },
+      { "level": "Extreme", "meso": 1397500000 }
+    ]
+  },
+  {
+    "name": "Damien",
+    "category": "Arcane",
+    "difficulties": [
+      { "level": "Normal", "meso": 169000000 },
+      { "level": "Hard",   "meso": 421875000 }
+    ]
+  },
+  {
+    "name": "Slime",
+    "category": "Arcane",
+    "difficulties": [
+      { "level": "Normal", "meso": 231673500 },
+      { "level": "Chaos",  "meso": 600578125 }
+    ]
+  },
+  {
+    "name": "Lucid",
+    "category": "Arcane",
+    "difficulties": [
+      { "level": "Easy",   "meso": 237009375 },
+      { "level": "Normal", "meso": 253828125 },
+      { "level": "Hard",   "meso": 504000000 }
+    ]
+  },
+  {
+    "name": "Will",
+    "category": "Arcane",
+    "difficulties": [
+      { "level": "Easy",   "meso": 246744750 },
+      { "level": "Normal", "meso": 279075000 },
+      { "level": "Hard",   "meso": 621810000 }
+    ]
+  },
+  {
+    "name": "Gloom",
+    "category": "Arcane",
+    "difficulties": [
+      { "level": "Normal", "meso": 297675000 },
+      { "level": "Chaos",  "meso": 563945000 }
+    ]
+  },
+  {
+    "name": "VHilla",
+    "category": "Arcane",
+    "difficulties": [
+      { "level": "Normal", "meso": 581880000 },
+      { "level": "Hard",   "meso": 762105000 }
+    ]
+  },
+  {
+    "name": "Darknell",
+    "category": "Arcane",
+    "difficulties": [
+      { "level": "Normal", "meso": 316875000 },
+      { "level": "Hard",   "meso": 667920000 }
+    ]
+  },
+  {
+    "name": "Black Mage",
+    "category": "Arcane",
+    "difficulties": [
+      { "level": "Hard",    "meso": 4500000000 },
+      { "level": "Extreme", "meso": 18000000000 }
+    ]
+  },
+  {
+    "name": "Seren",
+    "category": "Grandis",
+    "difficulties": [
+      { "level": "Normal",  "meso": 889021875 },
+      { "level": "Hard",    "meso": 1096562500 },
+      { "level": "Extreme", "meso": 4235000000 }
+    ]
+  },
+  {
+    "name": "Kalos",
+    "category": "Grandis",
+    "difficulties": [
+      { "level": "Easy",    "meso": 937500000 },
+      { "level": "Normal",  "meso": 1300000000 },
+      { "level": "Chaos",   "meso": 2600000000 },
+      { "level": "Extreme", "meso": 5200000000 }
+    ]
+  },
+  {
+    "name": "Adversary",
+    "category": "Grandis",
+    "difficulties": [
+      { "level": "Easy",    "meso": 985000000 },
+      { "level": "Normal",  "meso": 1365000000 },
+      { "level": "Hard",    "meso": 2940000000 },
+      { "level": "Extreme", "meso": 5880000000 }
+    ]
+  },
+  {
+    "name": "Kaling",
+    "category": "Grandis",
+    "difficulties": [
+      { "level": "Easy",    "meso": 1031250000 },
+      { "level": "Normal",  "meso": 1506500000 },
+      { "level": "Hard",    "meso": 2990000000 },
+      { "level": "Extreme", "meso": 6026000000 }
+    ]
+  },
+  {
+    "name": "Limbo",
+    "category": "Grandis",
+    "difficulties": [
+      { "level": "Normal", "meso": 2100000000 },
+      { "level": "Hard",   "meso": 3745000000 }
+    ]
+  },
+  {
+    "name": "Baldrix",
+    "category": "Grandis",
+    "difficulties": [
+      { "level": "Normal", "meso": 2800000000 },
+      { "level": "Hard",   "meso": 6026000000 }
+    ]
+  }
+]
