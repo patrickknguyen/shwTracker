@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>shwTracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top date bar -->
+  <div id="date-bar">
+    <span id="current-date"></span>
+    <span id="week-range"></span>
+  </div>
+
+  <div id="app">
+    <!-- Dailies Panel -->
+    <div class="panel" id="dailies-panel">
+      <div class="panel-header">
+        <span class="panel-title">Dailies</span>
+        <div class="panel-actions">
+          <label class="toggle-label" title="Toggle event column">
+            <input type="checkbox" id="event-toggle">
+            <span class="toggle-slider"></span>
+            <span class="toggle-text">Event</span>
+          </label>
+        </div>
+      </div>
+      <div class="panel-body">
+        <table id="dailies-table">
+          <thead>
+            <tr id="dailies-header-row">
+              <th class="remove-col"></th>
+              <th class="char-col"></th>
+              <!-- Task headers inserted by JS -->
+            </tr>
+          </thead>
+          <tbody id="dailies-body">
+            <!-- Character rows inserted by JS -->
+          </tbody>
+        </table>
+        <div class="add-char-row">
+          <button class="btn-add-char" id="add-character" title="Add character">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bosses Panel -->
+    <div class="panel" id="bosses-panel">
+      <div class="panel-header">
+        <span class="panel-title">Bosses</span>
+      </div>
+      <div class="panel-body">
+        <table id="bosses-table">
+          <thead>
+            <tr id="bosses-header-row">
+              <!-- Task headers inserted by JS -->
+            </tr>
+          </thead>
+          <tbody id="bosses-body">
+            <!-- Character rows inserted by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Memos Panel -->
+    <div class="panel" id="memos-panel">
+      <div class="panel-header">
+        <span class="panel-title memo-title">Memos</span>
+        <div class="panel-actions">
+          <button class="btn-icon" id="add-memo" title="Add memo">+</button>
+        </div>
+      </div>
+      <div class="panel-body memos-body" id="memos-list">
+        <!-- Memo cards inserted by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Character picker modal (for adding rows) -->
+  <div id="char-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>Select Character Image</span>
+        <button class="btn-icon modal-close" id="modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="char-grid">
+        <!-- Character images inserted by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Character tag modal (for memos - multi-select) -->
+  <div id="memo-char-modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>Tag Characters</span>
+        <button class="btn-icon modal-close" id="memo-modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="memo-char-grid">
+        <!-- Character images inserted by JS -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn-done" id="memo-char-done">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
