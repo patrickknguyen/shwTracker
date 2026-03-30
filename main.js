@@ -65,6 +65,10 @@ function createWindow() {
 
   mainWindow.loadFile('index.html');
   mainWindow.setMenuBarVisibility(false);
+
+  mainWindow.on('focus', () => {
+    mainWindow.webContents.send('window-focus');
+  });
 }
 
 app.whenReady().then(createWindow);

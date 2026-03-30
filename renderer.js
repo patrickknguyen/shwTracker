@@ -1004,8 +1004,7 @@ function removeCharacter(charId) {
 }
 
 // ---- Character Modal (add row) ----
-async function showCharModal() {
-  availableCharacters = await window.api.listCharacters();
+function showCharModal() {
   const grid = document.getElementById('char-grid');
   grid.innerHTML = '';
 
@@ -1142,6 +1141,11 @@ async function init() {
   renderAll();
   setupEvents();
   setupCustomTooltip();
+
+  window.api.onWindowFocus(async () => {
+    availableCharacters = await window.api.listCharacters();
+    renderAll();
+  });
 
   setInterval(() => {
     if (checkResets()) {

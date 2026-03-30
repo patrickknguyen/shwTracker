@@ -1,6 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
+  onWindowFocus: (callback) => ipcRenderer.on('window-focus', callback),
   loadData: () => ipcRenderer.invoke('load-data'),
   saveData: (data) => ipcRenderer.invoke('save-data', data),
   listCharacters: () => ipcRenderer.invoke('list-characters'),
