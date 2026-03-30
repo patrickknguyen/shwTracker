@@ -36,6 +36,10 @@
         "to": "bossData.json"
       },
       {
+        "from": "build/icon.ico",
+        "to": "icon.ico"
+      },
+      {
         "from": "purple_crystal.png",
         "to": "icons/purple_crystal.png"
       },

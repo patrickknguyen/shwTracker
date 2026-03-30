@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, shell } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
@@ -45,12 +45,17 @@ function getCustomBossDataPath() {
 }
 
 function createWindow() {
+  const iconPath = app.isPackaged
+    ? path.join(process.resourcesPath, 'icon.ico')
+    : path.join(__dirname, 'build', 'icon.ico');
+
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 750,
     minWidth: 800,
     minHeight: 500,
     backgroundColor: '#1a1a1e',
+    icon: iconPath,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -139,6 +144,13 @@ ipcMain.handle('load-icon', async (event, filename) => {
   } catch {
     return null;
   }
+});
+
+// IPC: Open characters folder in system file explorer
+ipcMain.handle('open-characters-folder', async () => {
+  const charDir = getCharactersPath();
+  shell.openPath(charDir);
+  return charDir;
 });
 
 // IPC: List character images

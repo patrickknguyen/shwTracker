@@ -422,6 +422,10 @@ th, td {
   padding: 0 !important;
 }
 
+#tracker-table .section-row .separator-header {
+  background: linear-gradient(180deg, #3e3e4a 0%, #32323e 100%) !important;
+}
+
 /* Add character row (below table) */
 .add-char-row {
   padding: 8px 4px;
@@ -675,6 +679,20 @@ th, td {
   display: flex;
   justify-content: flex-end;
   background: linear-gradient(180deg, #252530 0%, #1e1e24 100%);
+}
+
+.btn-open-folder {
+  background: linear-gradient(180deg, #3a3a4a 0%, #2a2a36 100%);
+  border: 1px solid #4a4a58;
+  color: #c0c0c8;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.btn-open-folder:hover {
+  background: linear-gradient(180deg, #4a4a5a 0%, #3a3a46 100%);
+  color: #e0e0e8;
 }
 
 .btn-done {

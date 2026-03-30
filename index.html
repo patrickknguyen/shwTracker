@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>shwTracker</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <!-- Top date bar -->
   <div id="date-bar">
@@ -86,10 +88,14 @@
   <div id="char-modal" class="modal hidden">
     <div class="modal-content">
       <div class="modal-header">
-        <span>Select Character Image</span>
+        <span>Select Character</span>
         <button class="btn-icon modal-close" id="modal-close">&times;</button>
       </div>
       <div class="modal-body" id="char-grid"></div>
+      <div class="modal-footer">
+        <button class="btn-open-folder" id="open-char-folder"
+          title="Open characters folder to add or change images">📂</button>
+      </div>
     </div>
   </div>
 
@@ -142,4 +148,5 @@
 
   <script src="renderer.js"></script>
 </body>
+
 </html>

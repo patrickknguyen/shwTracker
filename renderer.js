@@ -923,6 +923,9 @@ function setupEvents() {
   document.getElementById('char-modal').addEventListener('click', e => {
     if (e.target === e.currentTarget) hideCharModal();
   });
+  document.getElementById('open-char-folder').addEventListener('click', async () => {
+    await window.api.openCharactersFolder();
+  });
 
   // Memo char tag modal
   document.getElementById('memo-modal-close').addEventListener('click', hideMemoCharModal);
@@ -1001,7 +1004,8 @@ function removeCharacter(charId) {
 }
 
 // ---- Character Modal (add row) ----
-function showCharModal() {
+async function showCharModal() {
+  availableCharacters = await window.api.listCharacters();
   const grid = document.getElementById('char-grid');
   grid.innerHTML = '';
 
